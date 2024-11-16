@@ -4,7 +4,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node index.js"
+    "start": "nodemon index.js"
   },
   "dependencies": {
     "axios": "^1.x.x",
@@ -19,6 +19,7 @@
     "joi": "^17.13.3",
     "multer": "1.4.5-lts.1",
     "nodemailer": "^6.9.0",
+    "nodemon": "^3.1.7",
     "randomstring": "^1.1.5"
   },
   "directories": {
@@ -27,6 +28,5 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {},
   "description": ""
 }

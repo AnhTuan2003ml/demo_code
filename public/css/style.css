@@ -59,6 +59,10 @@ p{
 	margin: 0;
 	color:#999;
 }
+
+.nav-link {
+	display: inline-block !important;
+}
 /*-- main --*/
 .main {
     position: relative;

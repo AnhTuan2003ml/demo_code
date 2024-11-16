@@ -3,7 +3,6 @@ import multer, { diskStorage } from 'multer';
 import { existsSync, unlinkSync, writeFileSync, readFileSync } from 'fs';
 import path, { join } from 'path';
 import { addLogData } from './log.js'; // Import đúng file log.js trong cùng thư mục
-import { sendEmailNotification } from './sendEmail.js';
 export default () => {
     const router = Router();
     // Lấy đường dẫn thư mục hiện tại, sửa lại để không có dấu '\' ở đầu
@@ -67,14 +66,14 @@ export default () => {
     // API cập nhật thông tin văn bản đến
     router.put('/:id', upload.single('documentFile'), (req, res) => {
         const documentId = parseInt(req.params.id);
-        const {tenvb, noidung, ngayden, so, han, nguoiphutrach } = req.body;
+        const { tenvb, noidung, ngayden, so, han, nguoiphutrach } = req.body;
         const documentFile = req.file; // Tệp mới nếu có
 
         // Kiểm tra nếu không có tệp mới, sử dụng tệp cũ
         const filePath_doc = documentFile ? `../../doc/${path.basename(documentFile.filename)}` : req.body.oldFilePath || null;
         console.log(filePath_doc);
         // Tìm thông tin văn bản cũ (có thể lấy từ cơ sở dữ liệu hoặc từ file JSON)
-        readJSONFileID(filePath,documentId) // Giả sử bạn có hàm này để lấy thông tin văn bản cũ
+        readJSONFileID(filePath, documentId) // Giả sử bạn có hàm này để lấy thông tin văn bản cũ
             .then(oldDocument => {
                 const userId = req.session.userId;
                 // So sánh và tạo danh sách các thuộc tính thay đổi

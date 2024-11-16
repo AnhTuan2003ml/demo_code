@@ -64,18 +64,27 @@ const sendEmailNotification = async (to, subject, text, html) => {
 
 // Hàm kiểm tra gửi email
 const testSendEmail = async () => {
-    const to = 'tuankkffdnc@gmail.com';           // Thay thế bằng email người nhận
-    const subject = 'Thông báo kiểm tra';       // Tiêu đề email
-    const text = 'Đây là nội dung văn bản';     // Nội dung văn bản thuần
-    const html = '<h1>Đây là nội dung HTML</h1>'; // Nội dung HTML
+    const to = ['tuankkffdnc@gmail.com', 'xb91200@gmail.com'];
+    const subject = 'Thông báo kiểm tra';
+    const text = ['Hủy', 'Thêm']; // Text content for each email
+    const html = '<h1>Đây là nội dung HTML</h1>';
 
     try {
-        await sendEmailNotification(to, subject, text, html);
-        console.log('Email kiểm tra đã được gửi thành công!');
+        if (to.length !== text.length) {
+            throw new Error('Số lượng email và số lượng nội dung không khớp!');
+        }
+
+        // Send each email with the corresponding text
+        for (let i = 0; i < to.length; i++) {
+            await sendEmailNotification(to[i], subject, text[i], html);  // Use text[i]
+            console.log(`Email kiểm tra đã được gửi thành công đến ${to[i]}!`);
+        }
+
     } catch (error) {
         console.error('Lỗi khi gửi email kiểm tra:', error);
     }
 };
+
 
 // Gọi hàm kiểm tra
 testSendEmail();
